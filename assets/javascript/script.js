@@ -1,6 +1,6 @@
 // Initial array of bands
 const bands = ['Green Day', 'Foo Fighters', 'Linkin Park', 'Red Hot Chili Peppers', 'No Doubt', 'Pearl Jam', 'U2', 'Coldplay', 'Paramore', 'Deftones', 'Goo Goo Dolls', 'Metallica'];
-const favs = 0;
+
 // Get band images via ajax call
 function getBandImages() {
   const band = $(this).attr('data-name');
