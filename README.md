@@ -10,5 +10,5 @@ In this assignment, we were asked to use the GIPHY API to make a dynamic web pag
 * CSS3
 * jQuery
 * AJAX
-* Giphy API
+* GIPHY API
 
