@@ -11,9 +11,14 @@ function getBandImages() {
     method: 'GET',
   }).then((response) => {
     const bandDiv = $("<div class='band'>");
+
     for (let i = 0; i < response.data.length; i++) {
       const bandImages = $(`<img src="${response.data[i].images.fixed_height_still.url}" alt="${response.data[i].title}" title="${response.data[i].title}">`);
-      bandDiv.append(bandImages);
+      const box = $("<div class='box'></div>");
+      const fav = $('<div class="fav"></div>');
+      fav.appendTo(box);
+      bandImages.appendTo(box);
+      bandDiv.append(box);
       // const bandRatings = $(`<p>Rated: ${response.data[i].rating}</p>`);
       // bandDiv.append(bandRatings);
     }
@@ -29,6 +34,16 @@ $(document).on('click', 'img', function () {
     $(this).attr('src', $(this).attr('src').replace(keyword, '.gif'));
   } else {
     $(this).attr('src', $(this).attr('src').replace('.gif', keyword));
+  }
+});
+
+// Let user add their 6 favorite images
+$(document).on('click', '.fav', function () {
+  $(this).addClass('faved');
+  event.preventDefault();
+  if ($('.faved').length < 7) {
+    console.log($('.faved').length);
+    $(this).toggle().next().appendTo('#favs');
   }
 });
 
