@@ -13,9 +13,9 @@ function getBandImages() {
     const bandDiv = $("<div class='band'>");
     for (let i = 0; i < response.data.length; i++) {
       const bandImages = $(`<img src=${response.data[i].images.fixed_height_still.url}>`);
-      // const bandRatings = $(`<p>Rated: ${response.data[i].rating}</p>`);
       bandDiv.append(bandImages);
-      // bandDiv.append(rating);
+      // const bandRatings = $(`<p>Rated: ${response.data[i].rating}</p>`);
+      // bandDiv.append(bandRating);
     }
 
     $('#band-view').html(bandDiv);
