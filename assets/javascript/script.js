@@ -41,8 +41,6 @@ $(document).on('click', 'img', function () {
 $(document).on('click', '.fav', function () {
   event.preventDefault();
   if ($('.faved').length < 7) {
-    $(this).val('faved');
-    console.log($('.faved').length);
     $(this).toggle().next().addClass('faved')
       .appendTo('#favs');
   }
