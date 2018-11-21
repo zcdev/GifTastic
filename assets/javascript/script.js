@@ -4,7 +4,7 @@ const bands = ['Green Day', 'Foo Fighters', 'Linkin Park', 'Red Hot Chili Pepper
 // Get band images via ajax call
 function getBandImages() {
   const band = $(this).attr('data-name');
-  const queryURL = `http://api.giphy.com/v1/gifs/search?q=${band}&api_key=bmop7DR92LNMbtJ1rzRdKGOgtAC8twiu&limit=10&rating=g`;
+  const queryURL = `https://api.giphy.com/v1/gifs/search?q=${band}&api_key=bmop7DR92LNMbtJ1rzRdKGOgtAC8twiu&limit=10&rating=g`;
 
   $.ajax({
     url: queryURL,
