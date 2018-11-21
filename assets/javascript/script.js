@@ -23,7 +23,7 @@ function getBandImages() {
 }
 
 // Toggle image to be still or animated
-$(document).on('click', 'img', function toggle() {
+$(document).on('click', 'img', function () {
   const keyword = '_s.gif';
   if ($(this).attr('src').includes(keyword)) {
     $(this).attr('src', $(this).attr('src').replace(keyword, '.gif'));
