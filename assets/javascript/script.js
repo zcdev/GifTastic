@@ -26,9 +26,9 @@ function getBandImages() {
 $(document).on('click', 'img', function () {
   const keyword = '_s.gif';
   if ($(this).attr('src').includes(keyword)) {
-    $(this).attr('src', $(this).attr('src').replace('_s.gif', '.gif'));
+    $(this).attr('src', $(this).attr('src').replace(keyword, '.gif'));
   } else {
-    $(this).attr('src', $(this).attr('src').replace('.gif', '_s.gif'));
+    $(this).attr('src', $(this).attr('src').replace('.gif', keyword));
   }
 });
 
