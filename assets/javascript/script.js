@@ -13,7 +13,7 @@ function getBandImages() {
     const bandDiv = $("<div class='band'>");
 
     for (let i = 0; i < response.data.length; i++) {
-      const bandImages = $(`<img src="${response.data[i].images.fixed_height_still.url}" alt="${response.data[i].title}" title="${response.data[i].title}">`);
+      const bandImages = $(`<img src="${response.data[i].images.fixed_height_still.url}" value="${i}" alt="${response.data[i].title}" title="${response.data[i].title}">`);
       const box = $("<div class='box'></div>");
       const fav = $('<div class="fav"></div>');
       fav.appendTo(box);
@@ -41,8 +41,17 @@ $(document).on('click', 'img', function () {
 $(document).on('click', '.fav', function () {
   event.preventDefault();
   if ($('.faved').length < 6) {
-    $(this).toggle().next().addClass('faved')
-      .appendTo('#favs');
+    $(this).toggle().next().addClass('faved').appendTo('#favs');
+    
+    let faved = {};
+    $('.faved').each(function() {
+        const img = $(this).attr('value');
+        if (faved[img]) {
+            $(this).remove();
+        } else{
+            faved[img] = true;
+        }     
+    });
   }
 });
 
