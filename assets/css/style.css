@@ -58,6 +58,7 @@ h1 {
 .fav {
     font-size: 2.5rem;
 }
+
 @media only screen and (max-width: 460px) {
     img {
         width: 300px;

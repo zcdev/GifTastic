@@ -13,7 +13,7 @@ function getBandImages() {
     const bandDiv = $("<div class='band'>");
 
     for (let i = 0; i < response.data.length; i++) {
-      const bandImages = $(`<img src="${response.data[i].images.fixed_height_still.url}" value="${i}" alt="${response.data[i].title}" title="${response.data[i].title}">`);
+      const bandImages = $(`<img src="${response.data[i].images.fixed_height_still.url}" value="${band + i}" alt="${response.data[i].title}" title="${response.data[i].title}">`);
       const box = $("<div class='box'></div>");
       const fav = $('<div class="fav">&#10084;</div>');
       fav.appendTo(box);
