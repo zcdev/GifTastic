@@ -55,10 +55,8 @@ h1 {
 .box {
     padding: 0.5rem;
 }
-
-.fav:before{
-    content: "\2764";
-    color: #ffffff;
+.fav {
+    font-size: 2rem;
 }
 @media only screen and (max-width: 460px) {
     img {
