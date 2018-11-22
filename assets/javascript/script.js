@@ -39,7 +39,6 @@ $(document).on('click', 'img', function () {
 
 // Let user add their 6 favorite images
 $(document).on('click', '.fav', function () {
-  event.preventDefault();
   if ($('.faved').length < 6) {
     $(this).toggle().next().addClass('faved').appendTo('#favs');
     
