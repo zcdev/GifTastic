@@ -38,7 +38,6 @@ function getBandImages() {
       listImages.push(bandImage);
       listTitles.push(bandTitle);
     }
-    console.log(listTitles);
     // If images are duplicated, remove them
     let index;
     for (let j = 0; j < favorites.length; j++) {
@@ -73,7 +72,6 @@ function getBandImages() {
 
         $('.faved').each(function () {
           favorites.push($(this).attr('data'));
-          console.log(favorites);
         });
       }
     });
