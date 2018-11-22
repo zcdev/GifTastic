@@ -1,10 +1,29 @@
 // Initial array of bands
-const bands = ['Green Day', 'Foo Fighters', 'Linkin Park', 'Red Hot Chili Peppers', 'No Doubt', 'Pearl Jam', 'U2', 'Coldplay', 'Paramore', 'Deftones', 'Goo Goo Dolls', 'Metallica'];
+const bands = [
+  'Green Day',
+  'Foo Fighters',
+  'Linkin Park',
+  'Red Hot Chili Peppers',
+  'No Doubt',
+  'Pearl Jam',
+  'U2',
+  'Coldplay',
+  'Paramore',
+  'Deftones',
+  'Goo Goo Dolls',
+  'Metallica',
+];
+
+const favorites = [];
+let bandImage = '';
+let bandTitle = '';
 
 // Get band images via ajax call
 function getBandImages() {
   const band = $(this).attr('data-name');
   const queryURL = `https://api.giphy.com/v1/gifs/search?q=${band}&api_key=bmop7DR92LNMbtJ1rzRdKGOgtAC8twiu&limit=10&rating=g`;
+  const listImages = [];
+  const listTitles = [];
 
   $.ajax({
     url: queryURL,
@@ -12,16 +31,52 @@ function getBandImages() {
   }).then((response) => {
     const bandDiv = $("<div class='band'>");
 
+    // Get band images and titles
     for (let i = 0; i < response.data.length; i++) {
-      const bandImages = $(`<img src="${response.data[i].images.fixed_height_still.url}" value="${band + `-` + i}" alt="${response.data[i].title}" title="${response.data[i].title}">`);
+      bandImage = response.data[i].images.fixed_height_still.url;
+      bandTitle = response.data[i].title + i;
+      listImages.push(bandImage);
+      listTitles.push(bandTitle);
+    }
+    console.log(listTitles);
+    // If images are duplicated, remove them
+    let index;
+    for (let j = 0; j < favorites.length; j++) {
+      index = listTitles.indexOf(favorites[j]);
+      if (index > -1) {
+        listTitles.splice(index, 1);
+        listImages.splice(index, 1);
+      }
+    }
+
+    // Render images after removing duplicates
+    for (let k = 0; k < listTitles.length; k++) {
+      const imageSrc = $('<img>');
       const box = $("<div class='box'></div>");
       const fav = $('<div class="fav">&#10084&#xfe0e;</div>');
+
+      imageSrc.attr('data', listTitles[k]);
+      imageSrc.attr('src', listImages[k]);
       fav.appendTo(box);
-      bandImages.appendTo(box);
+      imageSrc.appendTo(box);
       bandDiv.append(box);
-      // const bandRatings = $(`<p>Rated: ${response.data[i].rating}</p>`);
-      // bandDiv.append(bandRatings);
     }
+
+    // Let user add their 6 favorite images
+    $(document).on('click', '.fav', function () {
+      if ($('.faved').length < 6) {
+        $(this)
+          .toggle()
+          .next()
+          .addClass('faved')
+          .appendTo('#favs');
+
+        $('.faved').each(function () {
+          favorites.push($(this).attr('data'));
+          console.log(favorites);
+        });
+      }
+    });
 
     $('#band-view').html(bandDiv);
   });
@@ -30,27 +85,24 @@ function getBandImages() {
 // Toggle image to be still or animated
 $(document).on('click', 'img', function () {
   const keyword = '_s.gif';
-  if ($(this).attr('src').includes(keyword)) {
-    $(this).attr('src', $(this).attr('src').replace(keyword, '.gif'));
+  if (
+    $(this)
+      .attr('src')
+      .includes(keyword)
+  ) {
+    $(this).attr(
+      'src',
+      $(this)
+        .attr('src')
+        .replace(keyword, '.gif'),
+    );
   } else {
-    $(this).attr('src', $(this).attr('src').replace('.gif', keyword));
-  }
-});
-
-// Let user add their 6 favorite images
-$(document).on('click tap', '.fav', function () {
-  if ($('.faved').length < 6) {
-    $(this).toggle().next().addClass('faved').appendTo('#favs');
-    
-    let faved = {};
-    $('.faved').each(function() {
-        const img = $(this).attr('value');
-        if (faved[img]) {
-            $(this).remove();
-        } else{
-            faved[img] = true;
-        }     
-    });
+    $(this).attr(
+      'src',
+      $(this)
+        .attr('src')
+        .replace('.gif', keyword),
+    );
   }
 });
 
@@ -58,7 +110,9 @@ $(document).on('click tap', '.fav', function () {
 function renderButtons() {
   $('#buttons-view').empty();
   for (let i = 0; i < bands.length; i++) {
-    const newButton = $('<button>').attr('data-name', bands[i]).text(bands[i]);
+    const newButton = $('<button>')
+      .attr('data-name', bands[i])
+      .text(bands[i]);
     $('#buttons-view').append(newButton);
   }
 }
@@ -66,7 +120,9 @@ function renderButtons() {
 // Add band
 $('#add-band').on('click', (event) => {
   event.preventDefault();
-  const band = $('#band-input').val().trim();
+  const band = $('#band-input')
+    .val()
+    .trim();
   if (band !== '' && !bands.includes(band)) {
     bands.push(band);
     renderButtons();
