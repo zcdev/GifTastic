@@ -65,7 +65,7 @@ function getBandImages() {
     $(document).on('click', '.fav', function () {
       if ($('.faved').length < 6) {
         $(this)
-          .toggle()
+          .hide()
           .next()
           .addClass('faved')
           .appendTo('#favs');
