@@ -57,7 +57,11 @@ img {
 }
 .fav {
     font-size: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0;
     display: inline-block;
+    width: 4rem;
+    height: 4rem;
 }
 
 @media only screen and (max-width: 460px) {

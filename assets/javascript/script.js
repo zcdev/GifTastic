@@ -52,7 +52,7 @@ function getBandImages() {
     for (let k = 0; k < listTitles.length; k++) {
       const imageSrc = $('<img>');
       const box = $("<div class='box'></div>");
-      const fav = $('<div class="fav">&#10084&#xfe0e;</div>');
+      const fav = $('<button class="fav">&#10084&#xfe0e;</button>');
 
       imageSrc.attr('data', listTitles[k]);
       imageSrc.attr('src', listImages[k]);
